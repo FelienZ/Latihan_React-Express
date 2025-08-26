@@ -1,0 +1,34 @@
+[
+  {
+    "id": "zxoMogx8Ej",
+    "name": "Samsung A5 2017",
+    "category": "electronics",
+    "price": 2000000,
+    "stock": 2,
+    "desc": "Samsung A5 2017"
+  },
+  {
+    "id": "4hgXsmQzMK",
+    "name": "Rexus Gaming Floor Chair Rexus Swivel RFC-01",
+    "category": "furniture",
+    "price": 1330000,
+    "stock": 5,
+    "desc": "Kursi Gaming"
+  },
+  {
+    "id": "4-nBgzyqua",
+    "name": "Acer Nitro V15 2024",
+    "category": "electronics",
+    "price": 9800000,
+    "stock": 2,
+    "desc": "Acer Nitro V15 Ryzen 5"
+  },
+  {
+    "id": "pEB7yG3lQB",
+    "name": "Samsung S7 Edge 2017",
+    "category": "electronics",
+    "price": 2200000,
+    "stock": 3,
+    "desc": "Samsung S7 Edge 2017 Second"
+  }
+]
