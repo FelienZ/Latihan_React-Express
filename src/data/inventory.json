@@ -17,11 +17,11 @@
   },
   {
     "id": "4-nBgzyqua",
-    "name": "Acer Nitro V15 2024",
+    "name": "Acer Nitro V15 2024 RTX 3050 6GB",
     "category": "electronics",
-    "price": 9800000,
-    "stock": 2,
-    "desc": "Acer Nitro V15 Ryzen 5"
+    "price": 9600000,
+    "stock": 1,
+    "desc": "Acer Nitro V15 Ryzen 5 RTX 3060 6GB"
   },
   {
     "id": "pEB7yG3lQB",
@@ -30,5 +30,13 @@
     "price": 2200000,
     "stock": 3,
     "desc": "Samsung S7 Edge 2017 Second"
+  },
+  {
+    "id": "hL87PEhBOK",
+    "name": "Asus TUF A16",
+    "category": "electronics",
+    "price": 10000000,
+    "stock": 2,
+    "desc": "Asus TUF A16 RTX 3050 4GB"
   }
 ]
