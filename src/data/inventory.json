@@ -3,9 +3,9 @@
     "id": "zxoMogx8Ej",
     "name": "Samsung A5 2017",
     "category": "electronics",
-    "price": 2000000,
-    "stock": 2,
-    "desc": "Samsung A5 2017"
+    "price": 500000,
+    "stock": 1,
+    "desc": "Samsung A5 2017 Second"
   },
   {
     "id": "4hgXsmQzMK",
@@ -38,5 +38,13 @@
     "price": 10000000,
     "stock": 2,
     "desc": "Asus TUF A16 RTX 3050 4GB"
+  },
+  {
+    "id": "qxgzFg_luX",
+    "name": "Redmi Note 4 Miku Edition",
+    "category": "electronics",
+    "price": 500000,
+    "stock": 1,
+    "desc": "Redmi Note 4 Miku Edition"
   }
 ]

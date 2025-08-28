@@ -17,7 +17,7 @@ exports.addInventoryItem = async(req, res) => {
             return res.status(400).json({message: 'Data Tidak Valid!'})
         }
         const newItem = await inventoryServices.postItems({name, category, price, stock, desc});
-        res.status(201).json({item: newItem, message: 'Berhasil Menambahkan!'})
+        res.status(201).json({item: newItem})
     } catch (error) {
         res.status(500).json({message: `Kesalahan Server dalam Post: ${error.message}`})
     }

@@ -14,12 +14,13 @@ async function getInventoryItems() {
 async function postItems({name, category, price, stock, desc}) {
     const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
     const checkData = data.some(i => i.name.trim().toLowerCase() === name.trim().toLowerCase());
-    if(checkData){
-        throw new Error('Duplikasi Data!')
-    }
     const id = nanoid(10)
     const newData = {
         id, name, category, price, stock, desc
+    }
+    if(checkData){
+        console.error('Duplikasi Data!')
+        return newData;
     }
     data.push(newData)
     await fs.writeFile(filePath, JSON.stringify(data, null, 2))
@@ -29,11 +30,12 @@ async function postItems({name, category, price, stock, desc}) {
 async function putItems({id, name, category, price, stock, desc}) {
     const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
     const checkData = data.some(i => i.name.trim().toLowerCase() === name.trim().toLowerCase() && i.id !== id);
-    if(checkData){
-        throw new Error('Duplikasi Data!')
-    }
     const newData = {
         id, name, category, price, stock, desc
+    }
+    if(checkData){
+        console.error('Duplikasi Data!')
+        return newData;
     }
     const mapData = data.map(i => {
         if(i.id === id){
