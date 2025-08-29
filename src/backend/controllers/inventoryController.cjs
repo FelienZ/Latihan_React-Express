@@ -1,4 +1,5 @@
 //kirim ke Services
+const { nanoid } = require('nanoid');
 const inventoryServices = require('../services/inventoryServices.cjs')
 
 exports.getInventoryItems = async(req, res) => {
@@ -12,11 +13,12 @@ exports.getInventoryItems = async(req, res) => {
 
 exports.addInventoryItem = async(req, res) => {
     try {
-        const { name, category, price, stock, desc } = req.body;
+        const { name, category, price, stock, description } = req.body;
         if(name.trim() === '' || category.trim() === '' || typeof(price) !== 'number' || typeof(stock) !== 'number'){
             return res.status(400).json({message: 'Data Tidak Valid!'})
         }
-        const newItem = await inventoryServices.postItems({name, category, price, stock, desc});
+        const id = nanoid(10)
+        const newItem = await inventoryServices.postItems({id, name, category, price, stock, description});
         res.status(201).json({item: newItem})
     } catch (error) {
         res.status(500).json({message: `Kesalahan Server dalam Post: ${error.message}`})
@@ -25,12 +27,13 @@ exports.addInventoryItem = async(req, res) => {
 
 exports.updateInventoryItem = async(req, res) =>{
     try {
-        const { name, category, price, stock, desc } = req.body;
+        const { name, category, price, stock, description } = req.body;
         const id = req.params.id;
         if(name.trim() === '' || category.trim() === '' || typeof(price) !== 'number' || typeof(stock) !== 'number'){
             return res.status(400).json({message: 'Data Tidak Valid!'})
         }
-        const updateData = await inventoryServices.putItems({id, name, category, price, stock, desc});
+        const updateData = await inventoryServices.putItems({id, name, category, price, stock, description});
+        console.log(updateData)
         res.status(200).json({item: updateData, message: 'Berhasil Memperbarui!'})
     } catch (error) {
         res.status(500).json({message: `Kesalahan Server dalam Update: ${error.message}`})

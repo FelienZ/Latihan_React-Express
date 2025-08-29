@@ -1,56 +1,48 @@
-// Berhubungan langsung ke data : fs, JSON
+// Berhubungan langsung ke data : fs, JSON -> Sekarang Pool ke Postgre
 
 const fs = require('fs/promises');
 const { nanoid } = require('nanoid');
 const path = require('path');
 
+const { Pool } = require('pg');
+const pool = new Pool();
+
 const filePath = path.join(__dirname, '../../data/inventory.json');
 
 async function getInventoryItems() {
-    const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-    return data;
+    const query = {
+        text: 'SELECT * FROM items ORDER BY name'
+    }
+    const result = await pool.query(query);
+    return result.rows
 }
 
-async function postItems({name, category, price, stock, desc}) {
-    const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-    const checkData = data.some(i => i.name.trim().toLowerCase() === name.trim().toLowerCase());
-    const id = nanoid(10)
-    const newData = {
-        id, name, category, price, stock, desc
-    }
-    if(checkData){
-        console.error('Duplikasi Data!')
-        return newData;
-    }
-    data.push(newData)
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2))
-    return newData;
-}
-
-async function putItems({id, name, category, price, stock, desc}) {
-    const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-    const checkData = data.some(i => i.name.trim().toLowerCase() === name.trim().toLowerCase() && i.id !== id);
-    const newData = {
-        id, name, category, price, stock, desc
-    }
-    if(checkData){
-        console.error('Duplikasi Data!')
-        return newData;
-    }
-    const mapData = data.map(i => {
-        if(i.id === id){
-            return {...newData}
+async function postItems({id, name, category, price, stock, description}) {
+        const query = {
+            text: 'INSERT INTO items (id, name, category, price, stock, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            values: [id, name, category, price, stock, description],
         }
-        return i
-    })
-    await fs.writeFile(filePath, JSON.stringify(mapData, null, 2))
-    return newData;
+        // console.log(query)
+        const result = await pool.query(query);
+        return result.rows[0]
+}
+
+async function putItems({id, name, category, price, stock, description}) {
+    const query = {
+        text: 'UPDATE items SET name=$1, category=$2, price=$3, stock=$4, description=$5 WHERE id=$6 RETURNING *',
+        values: [name, category, price, stock, description, id]
+    }
+    const result = await pool.query(query);
+    return result.rows[0]
 }
 
 async function deleteItem(id) {
-    const data = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-    const filterData = data.filter(i => i.id !== id);
-    await fs.writeFile(filePath, JSON.stringify(filterData, null, 2))
+    const query = {
+        text: 'DELETE FROM items where id=$1',
+        values: [id]
+    }
+    const result = await pool.query(query)
+    return result.rows
 }
 
 module.exports = { getInventoryItems, postItems, putItems, deleteItem}

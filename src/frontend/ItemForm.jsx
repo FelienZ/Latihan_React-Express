@@ -8,7 +8,7 @@ export default function ItemForm(){
         category: '',
         stock: '',
         price: '',
-        desc: ''
+        description: ''
     }
     const [item, setItem] = useState(data);
 
@@ -19,7 +19,7 @@ export default function ItemForm(){
     }
     function handleDescChange(e){
         setItem({
-            ...item, desc: e.target.value
+            ...item, description: e.target.value
         })
     }
     function handleStockChange(e){
@@ -56,7 +56,7 @@ export default function ItemForm(){
             type: 'ADD_ITEMS',
             payload: data.item
         })
-        setItem({name: '', category: '', price: '', stock: '', desc: ''})
+        setItem({name: '', category: '', price: '', stock: '', description: ''})
     }
     return(
         <section className="flex flex-col h-screen gap-3 justify-center items-center">
@@ -78,7 +78,7 @@ export default function ItemForm(){
                     <option value="furniture">Perabotan</option>
                 </select>
                 <label htmlFor="name" className="font-bold text-sm">Deskripsi Barang :</label>
-                <textarea type="text" onChange={handleDescChange} value={item.desc} placeholder="Masukkan Deskripsi Barang..." name="name" className="textarea resize-none w-full bg-white border border-gray-400"/>
+                <textarea type="text" onChange={handleDescChange} value={item.description} placeholder="Masukkan Deskripsi Barang..." name="name" className="textarea resize-none w-full bg-white border border-gray-400"/>
                 <button type="submit" className="btn btn-neutral my-2">Submit</button>
             </form>
         </section>

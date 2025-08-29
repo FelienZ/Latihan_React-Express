@@ -11,12 +11,12 @@ export default function Navbar({title, logo, pages = []}){
                 <FontAwesomeIcon icon={logo}/>
                 <p className="font-bold text-xl">{title}</p>
             </div>
-            <ul className={`flex items-center gap-5 ${trigger ? `flex flex-col absolute top-15 p-4 w-full bg-neutral` : 'max-sm:hidden'}`}>
+            <ul className={`flex items-center gap-5 ${trigger ? `flex-col absolute top-15  p-4 w-full bg-neutral` : 'max-sm:hidden'}`}>
                 {pages.map((i, idx) => (
                     <li key={idx}>{i}</li>
                 ))}
             </ul>
-            <div className="hamburger hidden max-sm:flex">
+            <div className={`hamburger hidden max-sm:flex`}>
                 <FontAwesomeIcon icon={faBars} onClick={()=> setTrigger(!trigger)}/>
             </div>
         </nav>

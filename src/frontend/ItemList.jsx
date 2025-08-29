@@ -11,7 +11,7 @@ export default function ItemList(){
         name: '',
         price: '',
         stock: '',
-        desc: '',
+        description: '',
         category: ''
     }
     const [data, setData] = useState(newData);
@@ -22,7 +22,7 @@ export default function ItemList(){
     }
     function handleDescChange(e){
         setData({
-            ...data, desc: e.target.value
+            ...data, description: e.target.value
         })
     }
     function handleStockChange(e){
@@ -53,7 +53,7 @@ export default function ItemList(){
     }
     async function SendEdit(){
         // console.log(data)
-        if(data.name.trim() === ''|| data.category.trim() === ''|| data.desc.trim()===''|| typeof (data.price) !== 'number' || typeof(data.stock) !== 'number'){
+        if(data.name.trim() === ''|| data.category.trim() === ''|| typeof (data.price) !== 'number' || typeof(data.stock) !== 'number'){
             dispatch({
                 type: 'EDIT_INVALID'
             })
@@ -71,7 +71,7 @@ export default function ItemList(){
             payload: dataEdit.item,
             target: edit
         })
-        setData({name: '', price: '', stock: '', category: '', desc: ''})
+        setData({name: '', price: '', stock: '', category: '', description: ''})
         setEdit(null)
     }
     function handleOnSetTarget(text){
@@ -121,8 +121,8 @@ export default function ItemList(){
                         {edit === i.id ? (<input onChange={handleStockChange} defaultValue={i.stock} className="input bg-white border border-gray-400" placeholder="Stok"></input>) : (<span className="flex items-center gap-2">Stok: <p className="font-normal">{i.stock}</p></span>)}
                     </div>
                     {edit === i.id ? (
-                        <textarea onChange={handleDescChange} defaultValue={i.desc} className="textarea bg-white border resize-none border-gray-400 w-full" placeholder="Deskripsi Barang"></textarea>
-                    ) : (<textarea className="textarea disabled:bg-white resize-none disabled:text-gray-600 border border-gray-400 w-full" disabled value={i.desc}></textarea>)}
+                        <textarea onChange={handleDescChange} defaultValue={i.description} className="textarea bg-white border resize-none border-gray-400 w-full" placeholder="Deskripsi Barang"></textarea>
+                    ) : (<textarea className="textarea disabled:bg-white resize-none disabled:text-gray-600 border border-gray-400 w-full" disabled value={i.description}></textarea>)}
                     <div className="buttons grid grid-cols-2 gap-2 w-full items-center">
                         {edit === i.id ? (<button className="btn btn-primary" onClick={SendEdit}><FontAwesomeIcon icon={faSave}/> Simpan</button>) : (<button className="btn btn-warning" onClick={()=>setEdit(i.id)}><FontAwesomeIcon icon={faEdit}/> Edit</button>)}
                         <button className="btn btn-secondary" onClick={()=>SendDelete(i.id)}><FontAwesomeIcon icon={faTrash}/>Hapus</button>

@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+require('dotenv').config()
 const inventoryRoutes = require('./routes/inventoryRoutes.cjs')
 
-app.use(cors())
+const corsOptions = {
+    origin: 'http://localhost:5173'
+}
+app.use(cors(corsOptions))
 app.use(express.json())
 
 app.get('/', async(req, res)=> {
     res.json(`Ini Server Express`)
 })
 app.use('/api/inventory', inventoryRoutes)
-require('dotenv').config()
 const port = process.env.PORT;
 const host = process.env.HOST;
 
