@@ -4,7 +4,6 @@ import ItemForm from "./ItemForm";
 import ItemList from "./ItemList";
 import { useEffect, useReducer, useState } from "react";
 import { ItemsContext, ItemsReducerContext } from "./ItemContext";
-import { nanoid } from "nanoid";
 
 function ItemReducer(list, action){
     switch(action.type){
@@ -18,7 +17,7 @@ function ItemReducer(list, action){
                 if(action.payload.name.trim() === '' || action.payload.category.trim() === '' || action.payload.price <= 0 || action.payload.stock <= 0){
                     return {...list, status: 'fail'}
                 }
-                    return {...list, inventory: [...list.inventory, {...action.payload, id:nanoid(10)}], status: 'success'}
+                    return {...list, inventory: [...list.inventory, {...action.payload}], status: 'success'}
             };
         case "EDIT_ITEMS":
             {const checkData = list.inventory.find(i => i.name.trim().toLowerCase() === action.payload.name.trim().toLowerCase() && i.id !== action.target)
