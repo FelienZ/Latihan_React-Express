@@ -44,12 +44,12 @@ export default function ItemList(){
         const response = await fetch(`http://localhost:3000/api/inventory/${id}`, {
             method: 'DELETE'
         })
-        const data = await response.json();
-        console.log('Cek: ', data)
-        dispatch({
-            type: "DELETE_ITEMS",
-            target: data.target
-        })
+        if(response.ok){
+            dispatch({
+                type: "DELETE_ITEMS",
+                target: id
+            })    
+        }
     }
     async function SendEdit(){
         // console.log(data)

@@ -33,7 +33,6 @@ exports.updateInventoryItem = async(req, res) =>{
             return res.status(400).json({message: 'Data Tidak Valid!'})
         }
         const updateData = await inventoryServices.putItems({id, name, category, price, stock, description});
-        console.log(updateData)
         res.status(200).json({item: updateData, message: 'Berhasil Memperbarui!'})
     } catch (error) {
         res.status(500).json({message: `Kesalahan Server dalam Update: ${error.message}`})
